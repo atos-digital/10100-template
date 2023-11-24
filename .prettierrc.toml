@@ -1,0 +1,2 @@
+printWidth = 120
+plugins = ["prettier-plugin-go-template", "prettier-plugin-tailwindcss"]
