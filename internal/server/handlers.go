@@ -28,7 +28,7 @@ func (s *Server) handlePageIndex() http.Handler {
 
 func (s *Server) handleSaveSession() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		session, err := s.sess.Get(r, "session-name")
+		session, err := s.sess.Get(r, s.conf.CookieName)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

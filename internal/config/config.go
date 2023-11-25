@@ -12,6 +12,7 @@ type Config struct {
 	Host           string
 	Port           string
 	AllowedOrigins []string
+	CookieName     string
 	CookieSecret   []byte
 }
 
@@ -24,6 +25,7 @@ func New() Config {
 		AllowedOrigins: strings.Split(
 			getEnvDefault("ALLOWED_ORIGINS", fmt.Sprintf("http://%s:%s,https://%s:%s", host, port, host, port)), ",",
 		),
+		CookieName:   getEnvDefault("COOKIE_NAME", "session-name"),
 		CookieSecret: getCookieSecret("COOKIE_SECRET"),
 	}
 }
