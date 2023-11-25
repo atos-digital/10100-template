@@ -6,24 +6,28 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/atos-digital/10.10.0-template/internal/config"
 	"github.com/go-chi/chi/v5"
+	"github.com/gorilla/sessions"
+
+	"github.com/atos-digital/10.10.0-template/internal/config"
 )
 
 type Server struct {
 	r    *chi.Mux
 	srv  *http.Server
 	conf config.Config
+	sess sessions.Store
 }
 
 func New(conf config.Config) (*Server, error) {
 	s := new(Server)
+	s.conf = conf
 	s.r = chi.NewRouter()
 	s.srv = &http.Server{
 		Addr:    fmt.Sprintf("%s:%s", conf.Host, conf.Port),
 		Handler: s.r,
 	}
-	s.conf = conf
+	s.sess = s.cookieStore()
 	return s, nil
 }
 

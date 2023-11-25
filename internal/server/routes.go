@@ -17,6 +17,10 @@ func (s *Server) Routes() error {
 	}
 	s.r.Method(http.MethodGet, "/assets/*", http.StripPrefix("/assets/", http.FileServer(http.FS(contentAssets))))
 	s.r.Method(http.MethodGet, "/favicon.ico", s.HandleFavicon())
+
+	s.r.Method(http.MethodGet, "/session", s.handleSaveSession())
+	s.r.Method(http.MethodGet, "/read-session", s.handleReadSession())
+
 	s.r.Method(http.MethodGet, "/", s.handlePageIndex())
 
 	return nil
