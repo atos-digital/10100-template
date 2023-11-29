@@ -22,10 +22,10 @@ For a better developer experiance there are tools setup and configureed to allow
 
 It is highly recommended to install all tools and use VSCode as the IDE. There are settings and tasks configured to make development easier.
 
-First install `node` and run:
+First install `node` and a few `global` deps run:
 
 ```bash
-npm install
+npm install -g prettier tailwindcss
 ```
 
 This will setup tailwind and prettier formatters.

@@ -2,23 +2,21 @@
   "files.insertFinalNewline": true,
   "editor.formatOnSave": true,
   "gopls": {
-    "build.templateExtensions": ["gohtml"],
     "ui.semanticTokens": true,
     "formatting.local": "github.com/atos-digital",
     "formatting.gofumpt": true
   },
   "files.associations": {
-    "*.css": "tailwindcss",
-    "*.gohtml": "html"
-  },
-  "[go-template]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "*.css": "tailwindcss"
   },
   "[templ]": {
     "editor.defaultFormatter": "a-h.templ"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "tailwindCSS.includeLanguages": {
     "templ": "html"
