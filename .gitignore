@@ -2,4 +2,3 @@ node_modules
 tmp
 internal/server/assets/css/styles.css
 .env
-*_templ.go
