@@ -22,8 +22,15 @@ func (s *Server) HandleFavicon() http.Handler {
 }
 
 func (s *Server) handlePageIndex() http.Handler {
-	name := "World!"
-	return templ.Handler(ui.Index(name), templ.WithContentType("text/html"))
+	return templ.Handler(ui.Index(ui.Home()), templ.WithContentType("text/html"))
+}
+
+func (s *Server) handlePageContact() http.Handler {
+	return templ.Handler(ui.Index(ui.Contact()), templ.WithContentType("text/html"))
+}
+
+func (s *Server) handlePageAbout() http.Handler {
+	return templ.Handler(ui.Index(ui.About()), templ.WithContentType("text/html"))
 }
 
 func (s *Server) handleSaveSession() http.Handler {

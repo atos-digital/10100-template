@@ -1,6 +1,6 @@
 package ui
 
-templ Index(name string) {
+templ Index(page templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<meta charset="UTF-8"/>
@@ -11,7 +11,8 @@ templ Index(name string) {
 		<script src="/assets/js/hyperscript.min.js"></script>
 		<body>
 			@Header()
-			<div>Hello { name }!</div>
+			@Navigation()
+			@page
 			@Footer()
 		</body>
 	</html>

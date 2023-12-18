@@ -1,0 +1,13 @@
+package ui
+
+templ Navigation() {
+	<nav hx-boost="true">
+		@NavLink("Home", "/", true)
+		@NavLink("Contact", "/contact", false)
+		@NavLink("About", "/about", false)
+	</nav>
+}
+
+templ NavLink(name string, path templ.SafeURL, active bool) {
+	<a href={ path }>{ name }</a>
+}

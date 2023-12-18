@@ -23,5 +23,8 @@ func (s *Server) Routes() error {
 
 	s.r.Method(http.MethodGet, "/", s.handlePageIndex())
 
+	s.r.Method(http.MethodGet, "/contact", s.handlePageContact())
+	s.r.Method(http.MethodGet, "/about", s.handlePageAbout())
+
 	return nil
 }
