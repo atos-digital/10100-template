@@ -24,9 +24,11 @@ func (s *Server) Routes() error {
 	s.r.Method(http.MethodGet, "/", s.handlePageIndex())
 
 	s.r.Method(http.MethodGet, "/form", s.handlePageForm())
-
 	s.r.Method(http.MethodGet, "/form/submit", s.handleFormSubmit())
 	s.r.Method(http.MethodPost, "/form/submit", s.handleFormSubmit())
+
+	s.r.Method(http.MethodGet, "/search", s.handlePageSearch())
+	s.r.Method(http.MethodPost, "/search/users", s.handleSearchUsers())
 
 	s.r.Method(http.MethodGet, "/contact", s.handlePageContact())
 	s.r.Method(http.MethodGet, "/about", s.handlePageAbout())

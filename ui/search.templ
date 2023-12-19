@@ -1,0 +1,42 @@
+package ui
+
+var DefaultSearch = Index("Search", Search())
+
+templ Search() {
+	<div>
+		<input
+ 			type="search"
+ 			name="search"
+ 			placeholder="Begin Typing To Search Users..."
+ 			hx-post="/search/users"
+ 			hx-trigger="input changed delay:500ms, search"
+ 			hx-target="#search-results"
+		/>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody id="search-results"></tbody>
+		</table>
+	</div>
+}
+
+type SearchResult struct {
+	FirstName string
+	LastName  string
+	Email     string
+}
+
+templ SearchResults(results []SearchResult) {
+	for _, result := range results {
+		<tr>
+			<td>{ result.FirstName }</td>
+			<td>{ result.LastName }</td>
+			<td>{ result.Email }</td>
+		</tr>
+	}
+}
