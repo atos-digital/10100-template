@@ -3,10 +3,18 @@ package ui
 var DefaultForm = Index("Form", Form())
 
 templ Form() {
-	<div>
-		<form>
-			<input type="text" name="name"/>
-			<input type="submit" value="Submit"/>
+	<div id="form">
+		<form hx-post="/form/submit" hx-push-url="true" hx-ext="json-enc">
+			<input type="text" name="message" placeholder="Enter A Message..."/>
+			<button>Post Your Message</button>
 		</form>
+	</div>
+}
+
+templ FormResult(message string) {
+	<div id="form-result">
+		<label>Form Result</label>
+		<p>Message: { message }</p>
+		<button hx-get="/form" hx-target="#form-result">Reset Form</button>
 	</div>
 }

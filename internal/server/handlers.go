@@ -1,7 +1,9 @@
 package server
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/a-h/templ"
@@ -26,7 +28,34 @@ func (s *Server) handlePageIndex() http.Handler {
 }
 
 func (s *Server) handlePageForm() http.Handler {
-	return templ.Handler(ui.DefaultForm, templ.WithContentType("text/html"))
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		if r.Header.Get("HX-Boosted") != "true" && r.Header.Get("HX-Request") == "true" {
+			ui.Form().Render(r.Context(), w)
+			return
+		}
+		ui.DefaultForm.Render(r.Context(), w)
+	})
+}
+
+func (s *Server) handleFormSubmit() http.Handler {
+	type form struct {
+		Message string `json:"message"`
+	}
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Header.Get("HX-Request") != "true" {
+			http.Redirect(w, r, "/form", http.StatusMovedPermanently)
+			return
+		}
+		var f form
+		if err := json.NewDecoder(r.Body).Decode(&f); err != nil {
+			log.Println(err)
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+		w.Header().Set("Content-Type", "text/html")
+		ui.FormResult(f.Message).Render(r.Context(), w)
+	})
 }
 
 func (s *Server) handlePageContact() http.Handler {

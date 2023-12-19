@@ -16,16 +16,7 @@ import (
 	"github.com/atos-digital/10.10.0-template/internal/middleware"
 )
 
-type PageTitle string
-
-const (
-	PageHome    PageTitle = "Home"
-	PageForm    PageTitle = "Form"
-	PageContact PageTitle = "Contact"
-	PageAbout   PageTitle = "About"
-)
-
-func Navigation(currentPage PageTitle) templ.Component {
+func Navigation(currentPage string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
