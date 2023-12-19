@@ -1,18 +1,20 @@
 package ui
 
-templ Index(page templ.Component) {
+templ Index(pageTitle PageTitle, page templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<meta charset="UTF-8"/>
 		<title>10.10.0</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1"/>
 		<link rel="stylesheet" href="/assets/css/styles.css"/>
+		<link rel="stylesheet" href="/assets/css/pico.min.css"/>
 		<script src="/assets/js/htmx.min.js"></script>
 		<script src="/assets/js/hyperscript.min.js"></script>
 		<body>
-			@Header()
-			@Navigation()
-			@page
+			@Header(pageTitle)
+			<main class="container">
+				@page
+			</main>
 			@Footer()
 		</body>
 	</html>

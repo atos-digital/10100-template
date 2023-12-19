@@ -1,13 +1,45 @@
 package ui
 
-templ Navigation() {
+import (
+	"strings"
+
+	"github.com/atos-digital/10.10.0-template/internal/middleware"
+)
+
+type PageTitle string
+
+const (
+	PageHome    PageTitle = "Home"
+	PageForm    PageTitle = "Form"
+	PageContact PageTitle = "Contact"
+	PageAbout   PageTitle = "About"
+)
+
+templ Navigation(currentPage PageTitle) {
 	<nav hx-boost="true">
-		@NavLink("Home", "/", true)
-		@NavLink("Contact", "/contact", false)
-		@NavLink("About", "/about", false)
+		<ul>
+			<li><strong>{ string(currentPage) }</strong></li>
+		</ul>
+		<ul>
+			@NavLink("Home", "/", true)
+			@NavLink("Form", "/form", false)
+			@NavLink("Contact", "/contact", false)
+			@NavLink("About", "/about", false)
+		</ul>
 	</nav>
 }
 
-templ NavLink(name string, path templ.SafeURL, active bool) {
-	<a href={ path }>{ name }</a>
+func isActive(ctx context.Context, link templ.SafeURL) string {
+	requestPath := middleware.PathFromContext(ctx)
+	if requestPath == string(link) {
+		return "contrast"
+	}
+	if string(link) != "/" && strings.HasPrefix(requestPath, string(link)) {
+		return "contrast"
+	}
+	return ""
+}
+
+templ NavLink(name string, link templ.SafeURL, active bool) {
+	<li><a class={ isActive(ctx, link) } href={ link }>{ name }</a></li>
 }
