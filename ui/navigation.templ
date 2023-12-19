@@ -6,16 +6,7 @@ import (
 	"github.com/atos-digital/10.10.0-template/internal/middleware"
 )
 
-type PageTitle string
-
-const (
-	PageHome    PageTitle = "Home"
-	PageForm    PageTitle = "Form"
-	PageContact PageTitle = "Contact"
-	PageAbout   PageTitle = "About"
-)
-
-templ Navigation(currentPage PageTitle) {
+templ Navigation(currentPage string) {
 	<nav hx-boost="true">
 		<ul>
 			<li><strong>{ string(currentPage) }</strong></li>
