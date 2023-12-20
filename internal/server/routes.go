@@ -30,6 +30,8 @@ func (s *Server) Routes() error {
 	s.r.Method(http.MethodGet, "/search", s.handlePageSearch())
 	s.r.Method(http.MethodPost, "/search/users", s.handleSearchUsers())
 
+	s.r.Method(http.MethodGet, "/data", s.handlePageData())
+
 	s.r.Method(http.MethodGet, "/contact", s.handlePageContact())
 	s.r.Method(http.MethodGet, "/about", s.handlePageAbout())
 

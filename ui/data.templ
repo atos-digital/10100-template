@@ -1,0 +1,25 @@
+package ui
+
+var DefaultData = Index("Data", Data())
+
+type DataRow struct {
+	Item int
+	Page int
+}
+
+templ Data() {
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>Page</th>
+			</tr>
+		</thead>
+		<tbody id="search-results">
+			<tr>
+				<th>1</th>
+				<td>1</td>
+			</tr>
+		</tbody>
+	</table>
+}
