@@ -3,11 +3,12 @@ package server
 import (
 	"net/http"
 
-	"github.com/a-h/templ"
-
 	"github.com/atos-digital/10.10.0-template/ui"
 )
 
 func (s *Server) handlePageData() http.Handler {
-	return templ.Handler(ui.DefaultData, templ.WithContentType("text/html"))
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		ui.DefaultData.Render(r.Context(), w)
+	})
 }
