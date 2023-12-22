@@ -14,15 +14,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build image
-        run: docker build -t ghcr.io/atos-digital/10100-template:latest .
+      # - name: Build image
+      #   run: docker build -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest .
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Login to GitHub Container Registry
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push image
-        run: docker push ghcr.io/atos-digital/10100-template:latest
+      # - name: Push image
+      #   run: docker push ghcr.io/atos-digital/10100-template:latest
