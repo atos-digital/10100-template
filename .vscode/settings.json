@@ -2,7 +2,6 @@
   "files.insertFinalNewline": true,
   "editor.formatOnSave": true,
   "gopls": {
-    "ui.semanticTokens": true,
     "formatting.local": "github.com/atos-digital",
     "formatting.gofumpt": true
   },

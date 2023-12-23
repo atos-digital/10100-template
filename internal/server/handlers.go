@@ -6,7 +6,7 @@ import (
 
 	"github.com/a-h/templ"
 
-	"github.com/atos-digital/10.10.0-template/ui"
+	"github.com/atos-digital/10.10.0-template/ui/pages"
 )
 
 func (s *Server) HandleFavicon() http.Handler {
@@ -22,15 +22,15 @@ func (s *Server) HandleFavicon() http.Handler {
 }
 
 func (s *Server) handlePageIndex() http.Handler {
-	return templ.Handler(ui.DefaultHome, templ.WithContentType("text/html"))
+	return templ.Handler(pages.DefaultHome, templ.WithContentType("text/html"))
 }
 
 func (s *Server) handlePageContact() http.Handler {
-	return templ.Handler(ui.DefaultContact, templ.WithContentType("text/html"))
+	return templ.Handler(pages.DefaultContact, templ.WithContentType("text/html"))
 }
 
 func (s *Server) handlePageAbout() http.Handler {
-	return templ.Handler(ui.DefaultAbout, templ.WithContentType("text/html"))
+	return templ.Handler(pages.DefaultAbout, templ.WithContentType("text/html"))
 }
 
 func (s *Server) handleSaveSession() http.Handler {

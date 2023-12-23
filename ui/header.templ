@@ -1,11 +1,8 @@
 package ui
 
-templ Header(currentPage string) {
-	<header class="container py-1">
-		<hgroup>
-			<h1>10.10.0</h1>
-			<h2>10 Weeks to build, 10+ years evergreen, 0 ops</h2>
-		</hgroup>
-		@Navigation(currentPage)
+templ Header() {
+	<header class="flex items-center justify-between py-4 bg-white h-16">
+		<strong><h1 class="text-3xl">10.10.0</h1></strong>
+		@Navigation()
 	</header>
 }

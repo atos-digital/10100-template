@@ -6,15 +6,15 @@ import (
 
 	"github.com/a-h/templ"
 
-	"github.com/atos-digital/10.10.0-template/ui"
+	"github.com/atos-digital/10.10.0-template/ui/pages"
 )
 
 func (s *Server) handlePageSearch() http.Handler {
-	return templ.Handler(ui.DefaultSearch, templ.WithContentType("text/html"))
+	return templ.Handler(pages.DefaultSearch, templ.WithContentType("text/html"))
 }
 
 func (s *Server) handleSearchUsers() http.Handler {
-	data := []ui.SearchResult{
+	data := []pages.SearchResult{
 		{FirstName: "John", LastName: "Smith", Email: "johnsmith@email.com"},
 		{FirstName: "Jane", LastName: "Doe", Email: "janedoe@email.com"},
 		{FirstName: "Zelma", LastName: "Bush", Email: "zelmabush@email.com"},
@@ -38,8 +38,11 @@ func (s *Server) handleSearchUsers() http.Handler {
 		{FirstName: "Sanchez", LastName: "Dudley", Email: "sanchezdudley@email.com"},
 		{FirstName: "Nichole", LastName: "Weeks", Email: "nicholeweeks@email.com"},
 	}
-	simpleSearch := func(query string) []ui.SearchResult {
-		var results []ui.SearchResult
+	simpleSearch := func(query string) []pages.SearchResult {
+		var results []pages.SearchResult
+		if query == "" {
+			return results
+		}
 		for _, r := range data {
 			if strings.Contains(r.FirstName, query) ||
 				strings.Contains(r.LastName, query) ||
@@ -53,6 +56,6 @@ func (s *Server) handleSearchUsers() http.Handler {
 		r.ParseForm()
 		query := r.FormValue("search")
 		w.Header().Set("Content-Type", "text/html")
-		ui.SearchResults(simpleSearch(query)).Render(r.Context(), w)
+		pages.SearchResults(simpleSearch(query)).Render(r.Context(), w)
 	})
 }

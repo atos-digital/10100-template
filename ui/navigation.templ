@@ -6,33 +6,37 @@ import (
 	"github.com/atos-digital/10.10.0-template/internal/middleware"
 )
 
-templ Navigation(currentPage string) {
-	<nav hx-boost="true">
-		<ul>
-			<li><strong>{ string(currentPage) }</strong></li>
-		</ul>
-		<ul>
-			@NavLink("Home", "/", true)
-			@NavLink("Form", "/form", false)
-			@NavLink("Search", "/search", false)
-			@NavLink("Data", "/data", false)
-			@NavLink("Contact", "/contact", false)
-			@NavLink("About", "/about", false)
-		</ul>
+templ Navigation() {
+	<nav class="flex gap-3" hx-boost="true">
+		@NavLink("Home", "/")
+		/
+		@NavLink("Form", "/form")
+		/
+		@NavLink("Search", "/search")
+		/
+		@NavLink("Data", "/data")
+		/
+		@NavLink("Contact", "/contact")
+		/
+		@NavLink("About", "/about")
 	</nav>
 }
 
-func isActive(ctx context.Context, link templ.SafeURL) string {
+func isActive(ctx context.Context, link templ.SafeURL) bool {
 	requestPath := middleware.PathFromContext(ctx)
 	if requestPath == string(link) {
-		return "contrast"
+		return true
 	}
 	if string(link) != "/" && strings.HasPrefix(requestPath, string(link)) {
-		return "contrast"
+		return true
 	}
-	return ""
+	return false
 }
 
-templ NavLink(name string, link templ.SafeURL, active bool) {
-	<li><a class={ isActive(ctx, link) } href={ link }>{ name }</a></li>
+templ NavLink(name string, link templ.SafeURL) {
+	if isActive(ctx, link) {
+		<strong><a class="underline" href={ link }>{ name }</a></strong>
+	} else {
+		<a href={ link }>{ name }</a>
+	}
 }

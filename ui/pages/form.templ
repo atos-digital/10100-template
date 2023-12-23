@@ -1,6 +1,8 @@
-package ui
+package pages
 
-var DefaultForm = Index("Form", Form())
+import "github.com/atos-digital/10.10.0-template/ui"
+
+var DefaultForm = ui.Index(Form())
 
 type FormData struct {
 	FirstName string `json:"firstname"`
