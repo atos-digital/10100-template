@@ -26,32 +26,32 @@ templ Form() {
 templ FormResult(data FormData) {
 	<div id="form-result">
 		<h3>Form Result</h3>
-		<table>
+		<table class="border border-black">
 			<thead>
 				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Field</th>
-					<th scope="col">Value</th>
+					<th scope="col" class="border border-black">#</th>
+					<th scope="col" class="border border-black">Field</th>
+					<th scope="col" class="border border-black">Value</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th scope="row">1</th>
-					<td>Firstname</td>
-					<td>{ data.FirstName }</td>
+					<th scope="row" class="border border-black">1</th>
+					<td class="border border-black">Firstname</td>
+					<td class="border border-black">{ data.FirstName }</td>
 				</tr>
 				<tr>
-					<th scope="row">2</th>
-					<td>Lastname</td>
-					<td>{ data.LastName }</td>
+					<th scope="row" class="border border-black">2</th>
+					<td class="border border-black">Lastname</td>
+					<td class="border border-black">{ data.LastName }</td>
 				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Email</td>
-					<td>{ data.Email }</td>
+				<tr class="border border-black">
+					<th scope="row" class="border border-black">3</th>
+					<td class="border border-black">Email</td>
+					<td class="border border-black">{ data.Email }</td>
 				</tr>
 			</tbody>
 		</table>
-		<button hx-get="/form" hx-target="#form-result">Reset Form</button>
+		<button hx-get="/form" hx-target="#form-result" class="border bg-green-500">Reset Form</button>
 	</div>
 }
