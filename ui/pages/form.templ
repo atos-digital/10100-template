@@ -11,24 +11,14 @@ type FormData struct {
 }
 
 templ Form() {
-	<div>
+	<div class="flex m-auto w-max">
 		<form hx-post="/form/submit" hx-push-url="true" hx-ext="json-enc">
-			<div class="grid">
-				<label for="firstname">
-					First name
-					<input type="text" id="firstname" name="firstname" placeholder="First name" required/>
-				</label>
-				<label for="lastname">
-					Last name
-					<input type="text" id="lastname" name="lastname" placeholder="Last name" required/>
-				</label>
+			<div class="flex flex-col">
+				<input type="text" id="firstname" name="firstname" placeholder="First name" required class="border border-black"/>
+				<input type="text" id="lastname" name="lastname" placeholder="Last name" required class="border border-black"/>
+				<input type="email" id="email" name="email" placeholder="Email address" required class="border border-black"/>
 			</div>
-			<label for="email">
-				Email address
-				<input type="email" id="email" name="email" placeholder="Email address" required/>
-				<small>We'll never share your email with anyone else.</small>
-			</label>
-			<button type="submit">Submit</button>
+			<button type="submit" class="border bg-green-500">Submit</button>
 		</form>
 	</div>
 }
