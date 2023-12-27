@@ -22,21 +22,21 @@ templ Navigation() {
 	</nav>
 }
 
-func isActive(ctx context.Context, link templ.SafeURL) bool {
+func isActive(ctx context.Context, link string) bool {
 	requestPath := middleware.PathFromContext(ctx)
-	if requestPath == string(link) {
+	if requestPath == link {
 		return true
 	}
-	if string(link) != "/" && strings.HasPrefix(requestPath, string(link)) {
+	if link != "/" && strings.HasPrefix(requestPath, string(link)) {
 		return true
 	}
 	return false
 }
 
-templ NavLink(name string, link templ.SafeURL) {
+templ NavLink(name, link string) {
 	if isActive(ctx, link) {
-		<strong><a class="underline" href={ link }>{ name }</a></strong>
+		<strong><a class="underline" href={ templ.URL(link) }>{ name }</a></strong>
 	} else {
-		<a href={ link }>{ name }</a>
+		<a href={ templ.URL(link) }>{ name }</a>
 	}
 }
