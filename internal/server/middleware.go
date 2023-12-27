@@ -22,6 +22,6 @@ func (s *Server) middleware() {
 		middleware.Compress(5),
 		middleware.Logger,
 		m.Path,
-		m.Session(s.sess),
+		m.Session(s.sess, s.conf.CookieName),
 	)
 }

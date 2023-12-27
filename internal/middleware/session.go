@@ -16,10 +16,10 @@ func SessionFromContext(ctx context.Context) *sessions.Session {
 	return nil
 }
 
-func Session(store sessions.Store) func(next http.Handler) http.Handler {
+func Session(store sessions.Store, name string) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
-			session, err := store.Get(r, "session")
+			session, err := store.Get(r, name)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
