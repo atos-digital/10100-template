@@ -6,6 +6,7 @@ import (
 
 	"github.com/a-h/templ"
 
+	"github.com/atos-digital/10.10.0-template/internal/middleware"
 	"github.com/atos-digital/10.10.0-template/ui/pages"
 )
 
@@ -52,9 +53,9 @@ func (s *Server) handleSaveSession() http.Handler {
 
 func (s *Server) handleReadSession() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		session, err := s.sess.Get(r, "session-name")
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+		session := middleware.SessionFromContext(r.Context())
+		if session == nil {
+			http.Error(w, "session not found", http.StatusInternalServerError)
 			return
 		}
 		fmt.Fprint(w, session.Values)

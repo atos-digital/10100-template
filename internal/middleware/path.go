@@ -7,13 +7,11 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-type contextKey string
-
 var pathContextKey contextKey = "path"
 
 func PathFromContext(ctx context.Context) string {
-	if theme, ok := ctx.Value(pathContextKey).(string); ok {
-		return theme
+	if path, ok := ctx.Value(pathContextKey).(string); ok {
+		return path
 	}
 	return ""
 }
