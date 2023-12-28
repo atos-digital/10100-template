@@ -34,7 +34,12 @@ func New(conf config.Config) (*Server, error) {
 func (s *Server) ListenAndServe() error {
 	s.middleware()
 	s.Routes()
-	log.Printf("server: listening on http://%s", s.srv.Addr)
+	// address for use when testing cookies locally
+	if s.conf.Host == "0.0.0.0" {
+		log.Printf("server: listening on http://localhost:%s", s.conf.Port)
+	} else {
+		log.Printf("server: listening on http://%s", s.srv.Addr)
+	}
 	return s.srv.ListenAndServe()
 }
 
