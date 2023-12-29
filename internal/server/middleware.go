@@ -21,7 +21,8 @@ func (s *Server) middleware() {
 		middleware.Recoverer,
 		middleware.Compress(5),
 		middleware.Logger,
-		m.Path,
+		m.CapturePath,
+		m.CaptureHtmxRequestHeaders,
 		m.Session(s.sess, s.conf.CookieName),
 	)
 }

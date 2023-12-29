@@ -17,7 +17,7 @@ func PathFromContext(ctx context.Context) string {
 }
 
 // Path adds the URL path from the request to the context
-func Path(next http.Handler) http.Handler {
+func CapturePath(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		var path string
 		rctx := chi.RouteContext(r.Context())
