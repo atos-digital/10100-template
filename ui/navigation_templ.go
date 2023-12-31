@@ -98,7 +98,7 @@ func isActive(ctx context.Context, link string) bool {
 	if requestPath == link {
 		return true
 	}
-	if link != "/" && strings.HasPrefix(requestPath, string(link)) {
+	if link != "/" && strings.HasPrefix(requestPath, link) {
 		return true
 	}
 	return false

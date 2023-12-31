@@ -19,6 +19,10 @@ type HtmxRequestHeaders struct {
 	HXTrigger               string
 }
 
+func (h HtmxRequestHeaders) IsBoosted() bool {
+	return h.HXBoosted == "true"
+}
+
 func HtmxRequestHeadersFromContext(ctx context.Context) HtmxRequestHeaders {
 	if htmx, ok := ctx.Value(htmxRequesHeadersContextKey).(HtmxRequestHeaders); ok {
 		return htmx
