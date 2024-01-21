@@ -10,7 +10,9 @@ templ Index(page templ.Component) {
 		<script src="/assets/js/htmx.min.js"></script>
 		<script src="/assets/js/hyperscript.min.js"></script>
 		<script src="/assets/js/json-enc.js"></script>
-		<body class="container mx-auto px-4 flex flex-col min-h-screen">
+		<script src="/assets/js/idiomorph-ext.min.js"></script>
+		<meta name="htmx-config" content={ `{"globalViewTransitions":true}` }/>
+		<body hx-ext="morph" class="container mx-auto px-4 flex flex-col min-h-screen">
 			@Header()
 			<main class="flex-1 overflow-auto">
 				@page
