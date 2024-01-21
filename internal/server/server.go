@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/sessions"
@@ -24,8 +25,10 @@ func New(conf config.Config) (*Server, error) {
 	s.conf = conf
 	s.r = chi.NewRouter()
 	s.srv = &http.Server{
-		Addr:    fmt.Sprintf("%s:%s", conf.Host, conf.Port),
-		Handler: s.r,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		Addr:         fmt.Sprintf("%s:%s", conf.Host, conf.Port),
+		Handler:      s.r,
 	}
 	s.sess = s.cookieStore()
 	return s, nil

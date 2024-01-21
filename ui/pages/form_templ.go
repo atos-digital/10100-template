@@ -33,7 +33,7 @@ func Form() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex m-auto w-max\"><form hx-post=\"/form/submit\" hx-push-url=\"true\" hx-ext=\"json-enc\"><div class=\"flex flex-col\"><input type=\"text\" id=\"firstname\" name=\"firstname\" placeholder=\"First name\" required class=\"border border-black\"> <input type=\"text\" id=\"lastname\" name=\"lastname\" placeholder=\"Last name\" required class=\"border border-black\"> <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email address\" required class=\"border border-black\"></div><button type=\"submit\" class=\"border bg-green-500\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex m-auto w-max\"><form hx-post=\"/form/submit\" hx-push-url=\"true\"><div class=\"flex flex-col\"><input type=\"text\" id=\"firstname\" name=\"firstname\" placeholder=\"First name\" required class=\"border border-black\"> <input type=\"text\" id=\"lastname\" name=\"lastname\" placeholder=\"Last name\" required class=\"border border-black\"> <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email address\" required class=\"border border-black\"></div><button type=\"submit\" class=\"border bg-green-500\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
