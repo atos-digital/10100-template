@@ -1,6 +1,7 @@
 package server
 
 import (
+	"encoding/json"
 	"net/http"
 	"strings"
 
@@ -53,9 +54,11 @@ func (s *Server) handleSearchUsers() http.Handler {
 		return results
 	}
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		r.ParseForm()
-		query := r.FormValue("search")
+		var data struct {
+			Search string `json:"search"`
+		}
+		json.NewDecoder(r.Body).Decode(&data)
 		w.Header().Set("Content-Type", "text/html")
-		pages.SearchResults(simpleSearch(query)).Render(r.Context(), w)
+		pages.SearchResults(simpleSearch(data.Search)).Render(r.Context(), w)
 	})
 }
