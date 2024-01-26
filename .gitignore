@@ -3,3 +3,4 @@ tmp
 internal/server/assets/css/styles.css
 .env
 .DS_Store
+fly.toml
