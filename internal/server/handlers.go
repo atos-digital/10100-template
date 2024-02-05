@@ -26,14 +26,6 @@ func (s *Server) handlePageIndex() http.Handler {
 	return templ.Handler(pages.DefaultHome, templ.WithContentType("text/html"))
 }
 
-func (s *Server) handlePageContact() http.Handler {
-	return templ.Handler(pages.DefaultContact, templ.WithContentType("text/html"))
-}
-
-func (s *Server) handlePageAbout() http.Handler {
-	return templ.Handler(pages.DefaultAbout, templ.WithContentType("text/html"))
-}
-
 func (s *Server) handleSaveSession() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		session, err := s.sess.Get(r, s.conf.CookieName)
