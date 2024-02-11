@@ -1,6 +1,6 @@
 module github.com/atos-digital/10.10.0-template
 
-go 1.21
+go 1.22
 
 require (
 	github.com/a-h/templ v0.2.543

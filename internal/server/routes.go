@@ -2,33 +2,26 @@ package server
 
 import (
 	"embed"
-	"io/fs"
-	"net/http"
 )
 
 //go:embed assets
 var assets embed.FS
 
 func (s *Server) Routes() error {
-	// special case: handler assets content for Chi router with subroute, default go router in 1.22 will not require this step
-	contentAssets, err := fs.Sub(fs.FS(assets), "assets")
-	if err != nil {
-		return err
-	}
-	s.r.Method(http.MethodGet, "/assets/*", http.StripPrefix("/assets/", http.FileServer(http.FS(contentAssets))))
-	s.r.Method(http.MethodGet, "/favicon.ico", s.HandleFavicon())
+	s.r.Handle("GET /assets/*", s.mw(s.HandleAssets(assets)))
+	s.r.Handle("GET /favicon.ico", s.HandleFavicon(assets))
 
-	s.r.Method(http.MethodGet, "/session", s.handleSaveSession())
-	s.r.Method(http.MethodGet, "/read-session", s.handleReadSession())
+	s.r.Handle("GET /session", s.mw(s.handleSaveSession()))
+	s.r.Handle("GET /read-session", s.mw(s.handleReadSession()))
 
-	s.r.Method(http.MethodGet, "/", s.handlePageIndex())
+	s.r.Handle("GET /", s.mw(s.handlePageIndex()))
 
-	s.r.Method(http.MethodGet, "/form", s.handlePageForm())
-	s.r.Method(http.MethodGet, "/form/submit", s.handleFormSubmit())
-	s.r.Method(http.MethodPost, "/form/submit", s.handleFormSubmit())
+	s.r.Handle("GET /form", s.mw(s.handlePageForm()))
+	s.r.Handle("GET /form/submit", s.mw(s.handleFormSubmit()))
+	s.r.Handle("POST /form/submit", s.mw(s.handleFormSubmit()))
 
-	s.r.Method(http.MethodGet, "/search", s.handlePageSearch())
-	s.r.Method(http.MethodPost, "/search/users", s.handleSearchUsers())
+	s.r.Handle("GET /search", s.mw(s.handlePageSearch()))
+	s.r.Handle("POST /search/users", s.mw(s.handleSearchUsers()))
 
 	return nil
 }

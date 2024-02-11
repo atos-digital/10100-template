@@ -1,7 +1,10 @@
 package server
 
 import (
+	"embed"
 	"fmt"
+	"io/fs"
+	"log"
 	"net/http"
 
 	"github.com/a-h/templ"
@@ -10,13 +13,20 @@ import (
 	"github.com/atos-digital/10.10.0-template/ui/pages"
 )
 
-func (s *Server) HandleFavicon() http.Handler {
+func (s *Server) HandleAssets(assets embed.FS) http.Handler {
+	contentAssets, err := fs.Sub(fs.FS(assets), "assets")
+	if err != nil {
+		log.Fatalf("HandleAssets: failed to load assets: %v", err)
+	}
+	return http.StripPrefix("/assets/", http.FileServerFS(contentAssets))
+}
+
+func (s *Server) HandleFavicon(assets embed.FS) http.Handler {
+	b, err := assets.ReadFile("assets/img/favicon.ico")
+	if err != nil {
+		log.Fatalf("HandleFavicon: failed to read favicon.ico: %v", err)
+	}
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		b, err := assets.ReadFile("assets/img/favicon.ico")
-		if err != nil {
-			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-			return
-		}
 		w.Header().Set("Content-Type", "image/x-icon")
 		w.Write(b)
 	})

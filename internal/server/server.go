@@ -7,14 +7,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/sessions"
 
 	"github.com/atos-digital/10.10.0-template/internal/config"
 )
 
 type Server struct {
-	r    *chi.Mux
+	r    *http.ServeMux
 	srv  *http.Server
 	conf config.Config
 	sess sessions.Store
@@ -23,7 +22,7 @@ type Server struct {
 func New(conf config.Config) (*Server, error) {
 	s := new(Server)
 	s.conf = conf
-	s.r = chi.NewRouter()
+	s.r = http.NewServeMux()
 	s.srv = &http.Server{
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
@@ -35,7 +34,6 @@ func New(conf config.Config) (*Server, error) {
 }
 
 func (s *Server) ListenAndServe() error {
-	s.middleware()
 	s.Routes()
 	// address for use when testing cookies locally
 	if s.conf.Host == "0.0.0.0" {
