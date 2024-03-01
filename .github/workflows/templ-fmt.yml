@@ -1,0 +1,27 @@
+name: Templ
+on:
+  # push:
+  #   branches:
+  #     - master
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  templ:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Install templ
+        run: go install github.com/a-h/templ/cmd/templ@v0.2.543
+      - name: Run templ fmt .
+        run: templ fmt .
+      - name: Check if any files changed
+        run: git diff --exit-code

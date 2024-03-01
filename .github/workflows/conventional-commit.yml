@@ -1,0 +1,18 @@
+name: Conventional Commit
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR
+        uses: atos-digital/PRConventionalCommits@v1.0.0
+        with:
+          task_types: '["feat","fix","docs","test","ci","refactor","perf","chore","revert","style"]'
+          add_label: "true"
