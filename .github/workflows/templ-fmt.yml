@@ -20,7 +20,7 @@ jobs:
         with:
           go-version-file: go.mod
       - name: Install templ
-        run: go install github.com/a-h/templ/cmd/templ@v0.2.543
+        run: go install github.com/a-h/templ/cmd/templ@$(go list -m github.com/a-h/templ | cut -d' ' -f2)
       - name: Run templ fmt .
         run: templ fmt .
       - name: Check if any files changed

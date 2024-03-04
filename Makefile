@@ -17,6 +17,6 @@ air:
 	@air
 .PHONY: air
 
-update-templ:
-	go install github.com/a-h/templ/cmd/templ@latest
-.PHONY: update-templ
+templ:
+	@rm -f $$(which templ) && go install github.com/a-h/templ/cmd/templ@$$(go list -m github.com/a-h/templ | cut -d' ' -f2)
+.PHONY: templ
