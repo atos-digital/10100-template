@@ -1,36 +1,11 @@
 package ui
 
-import (
-	"strings"
-
-	"github.com/atos-digital/10.10.0-template/internal/middleware"
-)
-
 templ Navigation() {
 	<nav class="flex gap-3" hx-boost="true">
 		@NavLink("Home", "/")
-		/
-		@NavLink("Form", "/form")
-		/
-		@NavLink("Search", "/search")
 	</nav>
 }
 
-func isActive(ctx context.Context, link string) bool {
-	requestPath := middleware.PathFromContext(ctx)
-	if requestPath == link {
-		return true
-	}
-	if link != "/" && strings.HasPrefix(requestPath, link) {
-		return true
-	}
-	return false
-}
-
 templ NavLink(name, link string) {
-	if isActive(ctx, link) {
-		<strong><a class="underline" href={ templ.URL(link) }>{ name }</a></strong>
-	} else {
-		<a href={ templ.URL(link) }>{ name }</a>
-	}
+	<a href={ templ.URL(link) }>{ name }</a>
 }

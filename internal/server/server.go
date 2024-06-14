@@ -7,16 +7,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gorilla/sessions"
-
-	"github.com/atos-digital/10.10.0-template/internal/config"
+	"github.com/atos-digital/10100-template/internal/config"
 )
 
 type Server struct {
 	r    *http.ServeMux
 	srv  *http.Server
 	conf config.Config
-	sess sessions.Store
 }
 
 func New(conf config.Config) (*Server, error) {
@@ -29,7 +26,6 @@ func New(conf config.Config) (*Server, error) {
 		Addr:         fmt.Sprintf("%s:%s", conf.Host, conf.Port),
 		Handler:      s.r,
 	}
-	s.sess = s.cookieStore()
 	return s, nil
 }
 

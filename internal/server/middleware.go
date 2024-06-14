@@ -5,8 +5,6 @@ import (
 
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
-
-	m "github.com/atos-digital/10.10.0-template/internal/middleware"
 )
 
 func (s *Server) mw(h http.Handler) http.Handler {
@@ -23,9 +21,6 @@ func (s *Server) mw(h http.Handler) http.Handler {
 		middleware.Recoverer,
 		middleware.Compress(5),
 		middleware.Logger,
-		m.CapturePath,
-		m.CaptureHtmxRequestHeaders,
-		m.Session(s.sess, s.conf.CookieName),
 	}
 	for _, m := range middlewares {
 		h = m(h)
